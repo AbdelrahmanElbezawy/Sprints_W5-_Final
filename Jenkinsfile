@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Checkout to Subdirectory') {
             steps {
-                 dir('./project-app') {
+                 dir('./FlaskApp') {
                 // This creates a directory named project-app in the current directory and initializes this directory as a git repository 
                 // and as the current directory for sh commands.
                 checkout scmGit(branches: [[name: "master"]], extensions: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/AbdelrahmanElbezawy/Sprints_W5-_Final.git']])
