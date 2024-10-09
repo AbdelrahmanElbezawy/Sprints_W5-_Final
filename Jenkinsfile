@@ -16,7 +16,7 @@ pipeline {
             }
         }
         stage('Checkout to Subdirectory') {
-           // steps {
+            steps {
            //      dir('./FlaskApp') {
            //     // This creates a directory named project-app in the current directory and initializes this directory as a git repository 
            //     // and as the current directory for sh commands.
@@ -31,6 +31,7 @@ pipeline {
                         error("No changes in subdirectory. Skipping build.")
                     }
                 }
+            }
         }
         stage('Build') {
             when {
