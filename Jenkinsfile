@@ -7,11 +7,22 @@ pipeline {
         dockerImage = ''
     }
     agent any
- //   	options { 
-//		checkoutToSubdirectory('Sprints_W5-_Final/FlaskApp') 
-//	}
-    stages {
 
+    stages {
+        stage('Checkout to Subdirectory') {
+            steps {
+                script {
+                    // Check out the code into a subdirectory called "my_subdirectory"
+                    dir('FlaskApp/') {
+                        checkout([
+                            $class: 'GitSCM',
+                            branches: [[name: '*/main']],
+                            userRemoteConfigs: [[url: 'https://github.com/AbdelrahmanElbezawy/Sprints_W5-_Final.git']]
+                        ])
+                    }
+                }
+            }
+        }
         stage('Build') {
 
             steps {
