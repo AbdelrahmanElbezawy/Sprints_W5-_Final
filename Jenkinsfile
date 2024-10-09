@@ -7,9 +7,9 @@ pipeline {
         dockerImage = ''
     }
     agent any
-    	options { 
-		checkoutToSubdirectory('Sprints_W5-_Final/FlaskApp') 
-	}
+ //   	options { 
+//		checkoutToSubdirectory('Sprints_W5-_Final/FlaskApp') 
+//	}
     stages {
 
         stage('Build') {
