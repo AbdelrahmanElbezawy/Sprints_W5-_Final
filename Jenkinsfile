@@ -7,24 +7,30 @@ pipeline {
         dockerImage = ''
     }
     agent any
-
     stages {
+        stage('Checkout') {
+            steps {
+                rm -rf *
+                // Checkout the code
+                checkout scm
+            }
+
         stage('Checkout to Subdirectory') {
             steps {
                 script {
-                    // Check out the code into a subdirectory called "my_subdirectory"
-                    dir('FlaskApp/') {
-                        checkout([
-                            $class: 'GitSCM',
-                            branches: [[name: '*/main']],
-                            userRemoteConfigs: [[url: 'https://github.com/AbdelrahmanElbezawy/Sprints_W5-_Final.git']]
-                        ])
+                    def changedFiles = sh(script: "git diff --name-only HEAD~1 HEAD", returnStdout: true).trim().split('\n')
+                    def changesInSubdir = changedFiles.any { it.startsWith('FlaskApp/') }
+                    if (!changesInSubdir) {
+                        currentBuild.result = 'NOT_BUILT'
+                        error("No changes in subdirectory. Skipping build.")
                     }
                 }
             }
         }
         stage('Build') {
-
+            when {
+                expression { currentBuild.result == null }
+            }
             steps {
                 //sh 'rm -rf *'
                 sh 'ls -la'
