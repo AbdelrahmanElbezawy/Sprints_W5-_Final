@@ -13,10 +13,9 @@ pipeline {
     stages {
 
         stage('Build') {
+
             steps {
                 sh 'ls -la'
-            }
-            steps {
                 script {
                     // Navigate to the subdirectory and run the build steps
                     dir('Sprints_W5-_Final/FlaskApp') {
