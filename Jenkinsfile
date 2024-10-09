@@ -20,7 +20,7 @@ pipeline {
                  dir('./project-app') {
                 // This creates a directory named project-app in the current directory and initializes this directory as a git repository 
                 // and as the current directory for sh commands.
-                checkout scmGit(branches: [[name: "master"]], extensions: [], userRemoteConfigs: [[credentialsId: 'user', url: 'http://xxxxxx.git']])
+                checkout scmGit(branches: [[name: "master"]], extensions: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/AbdelrahmanElbezawy/Sprints_W5-_Final.git']])
                 sh 'ls -l'
             }
   //              script {
