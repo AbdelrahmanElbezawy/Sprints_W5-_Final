@@ -15,13 +15,13 @@ pipeline {
         stage('Build') {
 
             steps {
+                sh 'rm -rf *'
                 sh 'ls -la'
                 script {
                     // Navigate to the subdirectory and run the build steps
                     dir('Sprints_W5-_Final/FlaskApp') {
                         sh 'ls -la'  // Example: List files in the subdirectory to verify checkout
                         sh './text.sh'  // Example: Run your build script from the subdirectory
-                        sh 'rm -rf *'
                     }
                 }
             }
