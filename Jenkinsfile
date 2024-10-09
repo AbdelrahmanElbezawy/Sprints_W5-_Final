@@ -26,7 +26,7 @@ pipeline {
         stage('Build') {
 
             steps {
-                sh 'rm -rf *'
+                //sh 'rm -rf *'
                 sh 'ls -la'
                 script {
                     // Navigate to the subdirectory and run the build steps
