@@ -14,7 +14,7 @@ pipeline {
                 // Checkout the code
                 checkout scm
             }
-
+        }
         stage('Checkout to Subdirectory') {
             steps {
                 script {
