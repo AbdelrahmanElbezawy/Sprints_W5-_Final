@@ -10,7 +10,6 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                sh 'rm -rf *'
                 // Checkout the code
                 checkout scm
             }
