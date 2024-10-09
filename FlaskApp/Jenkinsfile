@@ -13,20 +13,21 @@ pipeline {
                 sh 'rm -rf *'
                 // Checkout the code
                 checkout scm
+                sh 'ls -l'
             }
         }
-        stage('Checkout to Subdirectory') {
-            steps {
-                script {
-                    def changedFiles = sh(script: "git diff --name-only HEAD~1 HEAD", returnStdout: true).trim().split('\n')
-                    def changesInSubdir = changedFiles.any { it.startsWith('FlaskApp/') }
-                    if (!changesInSubdir) {
-                        currentBuild.result = 'NOT_BUILT'
-                        error("No changes in subdirectory. Skipping build.")
-                    }
-                }
-            }
-        }
+  //      stage('Checkout to Subdirectory') {
+  //          steps {
+  //              script {
+  //                  def changedFiles = sh(script: "git diff --name-only HEAD~1 HEAD", returnStdout: true).trim().split('\n')
+  //                  def changesInSubdir = changedFiles.any { it.startsWith('FlaskApp/') }
+  //                  if (!changesInSubdir) {
+  //                      currentBuild.result = 'NOT_BUILT'
+  //                      error("No changes in subdirectory. Skipping build.")
+  //                  }
+  //              }
+  //          }
+  //      }
         stage('Build') {
             when {
                 expression { currentBuild.result == null }
@@ -38,7 +39,7 @@ pipeline {
                     // Navigate to the subdirectory and run the build steps
                     dir('FlaskApp/') {
                         sh 'ls -la'  // Example: List files in the subdirectory to verify checkout
-                        sh './text.sh'  // Example: Run your build script from the subdirectory
+                      //  sh './text.sh'  // Example: Run your build script from the subdirectory
                     }
                 }
             }
