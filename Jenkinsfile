@@ -7,19 +7,34 @@ pipeline {
         dockerImage = ''
     }
     agent any
+    	options { 
+		checkoutToSubdirectory('FlaskApp') 
+	}
     stages {
-        stage('Cloning our Git') {
-            steps {
-                checkout scm
-               // git 'https://github.com/YourGithubAccount/YourGithubRepository.git'
-            }
-        }
-        stage('Building our image') {
+
+        stage('Build') {
             steps {
                 script {
-                    dockerImage = docker.build image + ":$BUILD_NUMBER"
+                    // Navigate to the subdirectory and run the build steps
+                    dir('FlaskApp') {
+                        sh 'ls -la'  // Example: List files in the subdirectory to verify checkout
+                        sh './text.sh'  // Example: Run your build script from the subdirectory
+                    }
                 }
             }
+        
+ //       stage('Cloning our Git') {
+ //           steps {
+ //               checkout scm
+ //              // git 'https://github.com/YourGithubAccount/YourGithubRepository.git'
+ //           }
+ //       }
+ //       stage('Building our image') {
+ //           steps {
+ //               script {
+ //                   dockerImage = docker.build image + ":$BUILD_NUMBER"
+ //               }
+ //           }
         }
         //stage('Deploy our image') {
         //    steps {
