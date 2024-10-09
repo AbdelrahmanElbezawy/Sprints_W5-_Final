@@ -8,7 +8,7 @@ pipeline {
     }
     agent any
     	options { 
-		checkoutToSubdirectory('FlaskApp') 
+		checkoutToSubdirectory('Sprints_W5-_Final') 
 	}
     stages {
 
