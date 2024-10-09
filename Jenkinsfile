@@ -10,22 +10,27 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                rm -rf *
                 // Checkout the code
                 checkout scm
             }
         }
         stage('Checkout to Subdirectory') {
             steps {
-                script {
-                    def changedFiles = sh(script: "git diff --name-only HEAD~1 HEAD", returnStdout: true).trim().split('\n')
-                    def changesInSubdir = changedFiles.any { it.startsWith('FlaskApp/') }
-                    if (!changesInSubdir) {
-                        currentBuild.result = 'NOT_BUILT'
-                        error("No changes in subdirectory. Skipping build.")
-                    }
-                }
+                 dir('./project-app') {
+                // This creates a directory named project-app in the current directory and initializes this directory as a git repository 
+                // and as the current directory for sh commands.
+                checkout scmGit(branches: [[name: "master"]], extensions: [], userRemoteConfigs: [[credentialsId: 'user', url: 'http://xxxxxx.git']])
+                sh 'ls -l'
             }
+  //              script {
+  //                  def changedFiles = sh(script: "git diff --name-only HEAD~1 HEAD", returnStdout: true).trim().split('\n')
+  //                  def changesInSubdir = changedFiles.any { it.startsWith('FlaskApp/') }
+  //                  if (!changesInSubdir) {
+  //                      currentBuild.result = 'NOT_BUILT'
+  //                      error("No changes in subdirectory. Skipping build.")
+  //                  }
+  //              }
+  //          }
         }
         stage('Build') {
             when {
@@ -70,5 +75,6 @@ pipeline {
         //        sh "docker rmi $image:$BUILD_NUMBER"
         //    }
         //}
+        }
     }
 }
