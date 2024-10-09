@@ -8,7 +8,7 @@ pipeline {
     }
     agent any
     	options { 
-		checkoutToSubdirectory('Sprints_W5-_Final') 
+		checkoutToSubdirectory('Sprints_W5-_Final/FlaskApp') 
 	}
     stages {
 
@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     // Navigate to the subdirectory and run the build steps
-                    dir('FlaskApp') {
+                    dir('Sprints_W5-_Final/FlaskApp') {
                         sh 'ls -la'  // Example: List files in the subdirectory to verify checkout
                         sh './text.sh'  // Example: Run your build script from the subdirectory
                     }
