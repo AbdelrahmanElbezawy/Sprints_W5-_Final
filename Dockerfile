@@ -2,8 +2,8 @@ FROM python:alpine3.20
 # Set working directory
 WORKDIR /app
 
-# Copy requirements
-COPY ./FlaskApp/requirements.txt .
+# Copy app code & files
+COPY ["./FlaskApp", "./"]   
 
 # For Alpine-based systems
 RUN pip install --upgrade pip
@@ -13,8 +13,6 @@ RUN apk update \
 
 # Install dependencies
 RUN pip install -r requirements.txt
-# Copy the app code
-COPY ["./FlaskApp/app.py", "./FlaskApp/static", "./FlaskApp/templates", "./"]   
 
 # Expose the app port
 EXPOSE 5002
