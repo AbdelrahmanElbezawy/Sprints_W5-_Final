@@ -48,5 +48,5 @@ pipeline {
         //    steps {
         //        sh "docker rmi $image:$BUILD_NUMBER"
         //    }
-        //}
+    }   //}
 }
