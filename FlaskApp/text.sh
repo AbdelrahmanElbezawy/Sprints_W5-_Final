@@ -1,5 +1,5 @@
 #!/bin/bash
 echo "the dir is FlaskApp"
-echo "change"
+echo "hi"
 echo `date`
 echo `pwd`
