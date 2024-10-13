@@ -34,7 +34,7 @@ pipeline {
                     dockerImage = docker.build image + ":$BUILD_NUMBER"
                 }
             }
-        }
+    }
         //stage('Deploy our image') {
         //    steps {
         //        script {
@@ -49,5 +49,4 @@ pipeline {
         //        sh "docker rmi $image:$BUILD_NUMBER"
         //    }
         //}
-    }
 }
