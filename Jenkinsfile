@@ -29,7 +29,7 @@ pipeline {
                 expression { currentBuild.result == null }
             }
             steps {
-                }
+
                 script {
                     dockerImage = docker.build image + ":$BUILD_NUMBER"
                 }
