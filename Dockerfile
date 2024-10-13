@@ -14,7 +14,7 @@ RUN apk update \
 # Install dependencies
 RUN pip install -r requirements.txt
 # Copy the app code
-COPY ./FlaskApp/static ./FlaskApp/templates app.py .
+COPY ["./FlaskApp/app.py", "./FlaskApp/static", "./FlaskApp/templates", "./"]   
 
 # Expose the app port
 EXPOSE 5002
