@@ -42,8 +42,10 @@ pipeline {
                     // Navigate to the subdirectory and run the build steps
                     dir('FlaskApp/') {
                         sh 'ls -la'  // Example: List files in the subdirectory to verify checkout
-                        dockerImage = docker.build image + ":$BUILD_NUMBER"
                     }
+                }
+                script {
+                    dockerImage = docker.build image + ":$BUILD_NUMBER"
                 }
             }
         
