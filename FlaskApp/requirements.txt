@@ -2,10 +2,6 @@ flask
 mysql-connector
 flask-mysql
 mysql
-<<<<<<< HEAD
 cryptography
 mysqlclient==2.1.1
 werkzeug===2.2.2
-=======
-cryptography    
->>>>>>> parent of 5c5923a (edit jenkins3)
