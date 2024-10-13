@@ -1,0 +1,7 @@
+flask
+mysql-connector
+flask-mysql
+mysql
+cryptography
+mysqlclient==2.1.1
+werkzeug===2.2.2
