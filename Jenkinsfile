@@ -1,7 +1,7 @@
 pipeline {
     environment {
         image = "abdelrahman66/flask"
-    //    registryCredential = 'git'
+        registryCredential = 'docker'
         dockerImage = ''
     }
     agent any
