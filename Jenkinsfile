@@ -1,7 +1,7 @@
 pipeline {
     environment {
-        image = "abdelrahman66/flask"
-    //    registryCredential = 'docker'
+        image = "depi/flask"
+    //    registryCredential = 'git'
         dockerImage = ''
     }
     agent any
@@ -35,15 +35,15 @@ pipeline {
                 }
             }
     }
-        stage('Deploy our image') {
-            steps {
-                script {
-                    docker.withRegistry( '', registryCredential ) {
-                        dockerImage.push()
-                    }
-                }
-            }
-        }
+        //stage('Deploy our image') {
+        //    steps {
+        //        script {
+        //            docker.withRegistry( '', registryCredential ) {
+        //                dockerImage.push()
+        //            }
+        //        }
+        //    }
+        //}
         //stage('Cleaning up') {
         //    steps {
         //        sh "docker rmi $image:$BUILD_NUMBER"
