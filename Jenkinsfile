@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        image = "depi/flask"
+        image = "abdelrahman66/flask"
     //    registryCredential = 'git'
         dockerImage = ''
     }
