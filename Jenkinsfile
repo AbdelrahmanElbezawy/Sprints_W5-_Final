@@ -1,14 +1,9 @@
 pipeline {
     environment {
-<<<<<<< HEAD
         //BRANCH_NAME
    //     EMAIL_RECIPIENTS = 'elbezawy.abdelrahman@gmail.com'
         image = "abdelrahman66/flask"
         registryCredential = 'git'
-=======
-        image = "depi/flask"
-    //    registryCredential = 'git'
->>>>>>> c11f2c40eed9a62df8fec17555f3e1de3a0035da
         dockerImage = ''
     }
     agent any
@@ -41,7 +36,6 @@ pipeline {
                     dockerImage = docker.build image + ":$BUILD_NUMBER"
                 }
             }
-<<<<<<< HEAD
         }
         stage('Deploy our image') {
             steps {
@@ -52,18 +46,6 @@ pipeline {
                 }
             }
         }
-=======
-    }
-        //stage('Deploy our image') {
-        //    steps {
-        //        script {
-        //            docker.withRegistry( '', registryCredential ) {
-        //                dockerImage.push()
-        //            }
-        //        }
-        //    }
-        //}
->>>>>>> c11f2c40eed9a62df8fec17555f3e1de3a0035da
         //stage('Cleaning up') {
         //    steps {
         //        sh "docker rmi $image:$BUILD_NUMBER"
