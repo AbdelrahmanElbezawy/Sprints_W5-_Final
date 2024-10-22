@@ -3,6 +3,17 @@ pipeline {
         image = "abdelrahman66/flask"
         registryCredential = 'docker'
         dockerImage = ''
+
+        // This can be nexus3 or nexus2
+        NEXUS_VERSION = "nexus3"
+        // This can be http or https
+        NEXUS_PROTOCOL = "http"
+        // Where your Nexus is running
+        NEXUS_URL = "192.168.152.45:32000"
+        // Repository where we will upload the artifact
+        NEXUS_REPOSITORY = "repository/docker-hosted"
+        // Jenkins credential id to authenticate to Nexus OSS
+        NEXUS_CREDENTIAL_ID = "nexus"
     }
     agent any
     stages {
@@ -44,9 +55,9 @@ pipeline {
                 }
             }
         }
-        //stage('Cleaning up') {
-        //    steps {
-        //        sh "docker rmi $image:$BUILD_NUMBER"
-        //    }
-    }   //}
+        stage('Cleaning up') {
+            steps {
+                sh "docker rmi $image:$BUILD_NUMBER"
+            }
+    }   }
 }
