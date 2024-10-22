@@ -55,10 +55,17 @@ pipeline {
         }
         stage('Deploy our image') {
             steps {
-                script {
-                    docker.withRegistry( '', registryCredential ) {
-                        dockerImage.push()
+               script {
+                    docker.withRegistry("${NEXUS_REGISTRY_URL}", "${NEXUS_CREDENTIALS_ID}") {
+                        def app = docker.image("${app_image}:${IMAGE_TAG}")
+                        // Push both the unique tag and latest tag
+                        app.push()
+                        app.push('latest')
                     }
+   //             script {
+   //                 docker.withRegistry( '', registryCredential ) {
+   //                     dockerImage.push()
+   //                 }
                 }
             }
         }
