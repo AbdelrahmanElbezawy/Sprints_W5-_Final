@@ -44,7 +44,7 @@ pipeline {
 
                 script {
                   //  dockerImage = docker.build image + ":$BUILD_NUMBER"
-                   dockerImage = docker.build -t ${NEXUS_URL}/${app_image}:${IMAGE_TAG} .
+                   dockerImage = docker.build -t $NEXUS_URL/$app_image:$IMAGE_TAG .
                 }
             }
     }
