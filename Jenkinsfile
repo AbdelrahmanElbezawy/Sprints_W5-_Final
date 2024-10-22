@@ -50,29 +50,29 @@ pipeline {
                         def app = docker.build("${app_image}:${IMAGE_TAG}")
                         // Tag the image with the 'latest' tag
                         app.tag('latest')                }
-            }
-    }
-        }
-        stage('Deploy our image') {
-            steps {
-               script {
-                    docker.withRegistry("${NEXUS_REGISTRY_URL}", "${NEXUS_CREDENTIALS_ID}") {
-                        def app = docker.image("${app_image}:${IMAGE_TAG}")
-                        // Push both the unique tag and latest tag
-                        app.push()
-                        app.push('latest')
-                    }
-   //             script {
-   //                 docker.withRegistry( '', registryCredential ) {
-   //                     dockerImage.push()
-   //                 }
                 }
             }
         }
-        stage('Cleaning up') {
-            steps {
-                sh "docker rmi $image:$BUILD_NUMBER"
-            }
-    } 
+   ///     stage('Deploy our image') {
+   ///         steps {
+   ///            script {
+   ///                 docker.withRegistry("${NEXUS_REGISTRY_URL}", "${NEXUS_CREDENTIALS_ID}") {
+   ///                     def app = docker.image("${app_image}:${IMAGE_TAG}")
+   ///                     // Push both the unique tag and latest tag
+   ///                     app.push()
+   ///                     app.push('latest')
+   ///                 }
+   ///             script {
+   ///                 docker.withRegistry( '', registryCredential ) {
+   ///                     dockerImage.push()
+   ///                 }
+   ///           }
+   ///       }
+    ///    }
+  ///      stage('Cleaning up') {
+  ///          steps {
+  ///              sh "docker rmi $image:$BUILD_NUMBER"
+  ///          }
+  ///  } 
     }
 }
