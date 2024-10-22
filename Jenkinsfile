@@ -1,19 +1,20 @@
 pipeline {
     environment {
-        image = "abdelrahman66/flask"
-        registryCredential = 'docker'
+        app_image = "app"
+        db_image = "app_db"
+        // Jenkins credential id to authenticate to Nexus OSS
+        registryCredential = 'nexus'
+
         dockerImage = ''
 
-        // This can be nexus3 or nexus2
-        NEXUS_VERSION = "nexus3"
         // This can be http or https
         NEXUS_PROTOCOL = "http"
         // Where your Nexus is running
         NEXUS_URL = "192.168.152.45:32000"
         // Repository where we will upload the artifact
         NEXUS_REPOSITORY = "repository/docker-hosted"
-        // Jenkins credential id to authenticate to Nexus OSS
-        NEXUS_CREDENTIAL_ID = "nexus"
+        // Fetch the git commit hash or build number as a unique tag
+        IMAGE_TAG = "${env.BUILD_NUMBER}" 
     }
     agent any
     stages {
@@ -42,7 +43,8 @@ pipeline {
             steps {
 
                 script {
-                    dockerImage = docker.build image + ":$BUILD_NUMBER"
+                  //  dockerImage = docker.build image + ":$BUILD_NUMBER"
+                   dockerImage = docker.build -t ${NEXUS_URL}/${app_image}:${IMAGE_TAG} .
                 }
             }
     }
