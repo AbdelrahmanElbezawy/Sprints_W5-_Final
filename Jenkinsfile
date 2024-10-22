@@ -10,7 +10,7 @@ pipeline {
         // This can be http or https
         NEXUS_PROTOCOL = "http"
         // Where your Nexus is running
-        NEXUS_REGISTRY_URL = "192.168.152.45:32000"
+        NEXUS_REGISTRY_URL = "192.168.152.45:31200"
         // Jenkins credential id to authenticate to Nexus OSS
         NEXUS_CREDENTIALS_ID =  'nexus'
         // Repository where we will upload the artifact
@@ -46,7 +46,7 @@ pipeline {
 
                 script {
                   //  dockerImage = docker.build image + ":$BUILD_NUMBER"
-                    docker.withRegistry("${NEXUS_REGISTRY_URL}", "${NEXUS_CREDENTIALS_ID}") {
+                    docker.withRegistry("${NEXUS_PROTOCOL}://${NEXUS_REGISTRY_URL}", "${NEXUS_CREDENTIALS_ID}") {
                         def app = docker.build("${app_image}:${IMAGE_TAG}")
                         // Tag the image with the 'latest' tag
                         app.tag('latest')                }
