@@ -4,7 +4,7 @@ pipeline {
         db_image = "app_db"
         // Jenkins credential id to authenticate to Nexus OSS
         registryCredential = 'nexus'
-        
+
         dockerImage = ''
 
         // This can be http or https
@@ -52,6 +52,7 @@ pipeline {
                         app.tag('latest')                }
             }
     }
+        }
         stage('Deploy our image') {
             steps {
                 script {
@@ -67,5 +68,4 @@ pipeline {
             }
     } 
     }
-}
 }
