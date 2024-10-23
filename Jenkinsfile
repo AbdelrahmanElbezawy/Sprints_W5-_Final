@@ -72,7 +72,7 @@ pipeline {
         stage('Cleaning up') {
             steps {
              ///   sh "docker rmi $image:$BUILD_NUMBER"
-                sh "docker untag ${NEXUS_REGISTRY_URL}/${app_image}:latest "
+                sh "docker rmi ${NEXUS_REGISTRY_URL}/${NEXUS_REPOSITORY}/${app_image}:latest "
                 sh "docker rmi ${app_image}:${IMAGE_TAG}"
         
             }
