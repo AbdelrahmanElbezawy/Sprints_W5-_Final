@@ -46,7 +46,7 @@ pipeline {
 
                 script {
                   //  dockerImage = docker.build image + ":$BUILD_NUMBER"
-                    docker.withRegistry("${NEXUS_PROTOCOL}://${NEXUS_REGISTRY_URL}", "${NEXUS_CREDENTIALS_ID}") {
+                    docker.withRegistry("${NEXUS_PROTOCOL}://${NEXUS_REGISTRY_URL}/${NEXUS_REPOSITORY}", "${NEXUS_CREDENTIALS_ID}") {
                         def app = docker.build("${app_image}:${IMAGE_TAG}")
                         // Tag the image with the 'latest' tag
                         app.tag('latest')                }
@@ -56,7 +56,7 @@ pipeline {
         stage('Deploy our image') {
             steps {
                script {
-                    docker.withRegistry("${NEXUS_REGISTRY_URL}", "${NEXUS_CREDENTIALS_ID}") {
+                    docker.withRegistry("${NEXUS_PROTOCOL}://${NEXUS_REGISTRY_URL}/${NEXUS_REPOSITORY}", "${NEXUS_CREDENTIALS_ID}") {
                         def app = docker.image("${app_image}:${IMAGE_TAG}")
                         // Push both the unique tag and latest tag
                         app.push()
